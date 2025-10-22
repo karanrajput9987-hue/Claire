@@ -1,0 +1,18 @@
+require('dotenv').config();
+const { Telegraf } = require('telegraf');
+
+const BOT_TOKEN = process.env.BOT_TOKEN;
+if (!BOT_TOKEN) {
+  console.error("BOT_TOKEN missing!");
+  process.exit(1);
+}
+
+const bot = new Telegraf(BOT_TOKEN);
+
+bot.on('text', async (ctx) => {
+  const text = ctx.message.text;
+  // simple reply
+  await ctx.reply(`Hey! Tumne bola: "${text}"`);
+});
+
+bot.launch().then(() => console.log("Bot started"));
